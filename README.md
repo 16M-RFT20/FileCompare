@@ -52,7 +52,7 @@
 
 ![실행화면](img/screenshot3-4.png)
 
-![실행화면](img/screenshot35.png)
+![실행화면](img/screenshot3-5.png)
 
 - 구현한 내용 (위 그림 참조)
 	- 
