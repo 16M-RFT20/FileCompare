@@ -31,6 +31,9 @@
             splitContainer1 = new SplitContainer();
             panel3 = new Panel();
             lvwLeftDir = new ListView();
+            name_left = new ColumnHeader();
+            size_left = new ColumnHeader();
+            date_left = new ColumnHeader();
             panel2 = new Panel();
             txtLeftDir = new TextBox();
             btnLeftDir = new Button();
@@ -39,17 +42,14 @@
             lblAppName = new Label();
             panel6 = new Panel();
             lvwrightDir = new ListView();
+            name_right = new ColumnHeader();
+            size_right = new ColumnHeader();
+            date_right = new ColumnHeader();
             panel5 = new Panel();
             txtRightDir = new TextBox();
             btnRightDir = new Button();
             panel4 = new Panel();
             btnCopyFromRight = new Button();
-            name_left = new ColumnHeader();
-            size_left = new ColumnHeader();
-            date_left = new ColumnHeader();
-            name_right = new ColumnHeader();
-            size_right = new ColumnHeader();
-            date_right = new ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -105,6 +105,21 @@
             lvwLeftDir.TabIndex = 3;
             lvwLeftDir.UseCompatibleStateImageBehavior = false;
             lvwLeftDir.View = View.Details;
+            // 
+            // name_left
+            // 
+            name_left.Text = "이름";
+            name_left.Width = 300;
+            // 
+            // size_left
+            // 
+            size_left.Text = "크기";
+            size_left.Width = 100;
+            // 
+            // date_left
+            // 
+            date_left.Text = "수정일";
+            date_left.Width = 160;
             // 
             // panel2
             // 
@@ -191,6 +206,21 @@
             lvwrightDir.UseCompatibleStateImageBehavior = false;
             lvwrightDir.View = View.Details;
             // 
+            // name_right
+            // 
+            name_right.Text = "이름";
+            name_right.Width = 300;
+            // 
+            // size_right
+            // 
+            size_right.Text = "크기";
+            size_right.Width = 100;
+            // 
+            // date_right
+            // 
+            date_right.Text = "수정일";
+            date_right.Width = 160;
+            // 
             // panel5
             // 
             panel5.Controls.Add(txtRightDir);
@@ -220,6 +250,7 @@
             btnRightDir.TabIndex = 2;
             btnRightDir.Text = "폴더선택";
             btnRightDir.UseVisualStyleBackColor = true;
+            btnRightDir.Click += btnRightDir_Click;
             // 
             // panel4
             // 
@@ -239,36 +270,6 @@
             btnCopyFromRight.TabIndex = 2;
             btnCopyFromRight.Text = "<<<";
             btnCopyFromRight.UseVisualStyleBackColor = true;
-            // 
-            // name_left
-            // 
-            name_left.Text = "이름";
-            name_left.Width = 300;
-            // 
-            // size_left
-            // 
-            size_left.Text = "크기";
-            size_left.Width = 100;
-            // 
-            // date_left
-            // 
-            date_left.Text = "수정일";
-            date_left.Width = 160;
-            // 
-            // name_right
-            // 
-            name_right.Text = "이름";
-            name_right.Width = 300;
-            // 
-            // size_right
-            // 
-            size_right.Text = "크기";
-            size_right.Width = 100;
-            // 
-            // date_right
-            // 
-            date_right.Text = "수정일";
-            date_right.Width = 160;
             // 
             // Form1
             // 
@@ -312,11 +313,11 @@
         private Button btnRightDir;
         private ListView lvwLeftDir;
         private ListView lvwrightDir;
-        private ColumnHeader name_left;
         private ColumnHeader size_left;
         private ColumnHeader date_left;
         private ColumnHeader name_right;
         private ColumnHeader size_right;
         private ColumnHeader date_right;
+        private ColumnHeader name_left;
     }
 }
