@@ -97,6 +97,7 @@
             // 
             lvwLeftDir.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lvwLeftDir.Columns.AddRange(new ColumnHeader[] { name_left, size_left, date_left });
+            lvwLeftDir.Font = new Font("한컴 고딕", 10.1999989F, FontStyle.Bold);
             lvwLeftDir.FullRowSelect = true;
             lvwLeftDir.GridLines = true;
             lvwLeftDir.Location = new Point(12, 3);
@@ -197,6 +198,7 @@
             // 
             lvwrightDir.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lvwrightDir.Columns.AddRange(new ColumnHeader[] { name_right, size_right, date_right });
+            lvwrightDir.Font = new Font("한컴 고딕", 10.1999989F, FontStyle.Bold);
             lvwrightDir.FullRowSelect = true;
             lvwrightDir.GridLines = true;
             lvwrightDir.Location = new Point(12, 3);
