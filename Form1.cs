@@ -192,5 +192,101 @@ namespace FileCompare
                 }
             }
         }
+
+        private void btnCopyFromLeft_Click(object sender, EventArgs e)
+        {
+            // Copy selected files from left list to right folder
+            if (string.IsNullOrWhiteSpace(txtRightDir.Text) || !Directory.Exists(txtRightDir.Text))
+            {
+                MessageBox.Show(this, "대상 폴더를 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var selected = lvwLeftDir.SelectedItems.Cast<ListViewItem>().ToList();
+            if (selected.Count == 0) return;
+
+            foreach (var item in selected)
+            {
+                // skip directories
+                if (item.SubItems.Count > 1 && item.SubItems[1].Text == "<DIR>") continue;
+
+                var srcInfo = item.Tag as FileInfo;
+                if (srcInfo == null) continue;
+
+                var destPath = Path.Combine(txtRightDir.Text, srcInfo.Name);
+                CopyFileWithConfirmation(srcInfo.FullName, destPath);
+            }
+
+            // refresh destination and recolor
+            PopulateListView(lvwrightDir, txtRightDir.Text);
+            CompareAndColor(lvwLeftDir, lvwrightDir);
+        }
+
+        private void btnCopyFromRight_Click(object sender, EventArgs e)
+        {
+            // Copy selected files from right list to left folder
+            if (string.IsNullOrWhiteSpace(txtLeftDir.Text) || !Directory.Exists(txtLeftDir.Text))
+            {
+                MessageBox.Show(this, "대상 폴더를 선택하세요.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var selected = lvwrightDir.SelectedItems.Cast<ListViewItem>().ToList();
+            if (selected.Count == 0) return;
+
+            foreach (var item in selected)
+            {
+                // skip directories
+                if (item.SubItems.Count > 1 && item.SubItems[1].Text == "<DIR>") continue;
+
+                var srcInfo = item.Tag as FileInfo;
+                if (srcInfo == null) continue;
+
+                var destPath = Path.Combine(txtLeftDir.Text, srcInfo.Name);
+                CopyFileWithConfirmation(srcInfo.FullName, destPath);
+            }
+
+            // refresh destination and recolor
+            PopulateListView(lvwLeftDir, txtLeftDir.Text);
+            CompareAndColor(lvwLeftDir, lvwrightDir);
+        }
+
+        // Copy file with overwrite confirmation when destination exists.
+        // Shows source/destination paths and last write times.
+        private void CopyFileWithConfirmation(string srcFullName, string destFullName)
+        {
+            try
+            {
+                if (File.Exists(destFullName))
+                {
+                    var srcTime = File.GetLastWriteTime(srcFullName);
+                    var destTime = File.GetLastWriteTime(destFullName);
+
+                    // No confirmation when source is newer OR times are equal (red->gray OR black->black)
+                    if (srcTime >= destTime)
+                    {
+                        File.Copy(srcFullName, destFullName, true);
+                        return;
+                    }
+
+                    // If source is older (gray->red), ask for confirmation
+                    var message = $"대상에 동일한 이름의 파일이 이미 있습니다.\r\n덮어쓰시겠습니까?\r\n\r\n" +
+                                  $"원본: {srcFullName}\r\n수정일: {srcTime}\r\n\r\n대상: {destFullName}\r\n수정일: {destTime}";
+
+                    var result = MessageBox.Show(this, message, "덮어쓰기 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result != DialogResult.Yes) return;
+
+                    File.Copy(srcFullName, destFullName, true);
+                }
+                else
+                {
+                    File.Copy(srcFullName, destFullName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "복사 중 오류: " + ex.Message, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

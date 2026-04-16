@@ -40,3 +40,19 @@
 	- 1단계: 동일 파일 - 양쪽 모두 검은색
 	- 2단계: 다른 파일 - New는 빨간색, Old는 회색
 	- 3단계: 단독 파일 - 보라색
+
+## 실행화면 (과제3)
+- 코드의 실행 스크린샷과 구현 내용 설명
+
+![실행화면](img/screenshot3-1.png)
+
+![실행화면](img/screenshot3-2.png)
+
+![실행화면](img/screenshot3-3.png)
+
+![실행화면](img/screenshot3-4.png)
+
+![실행화면](img/screenshot35.png)
+
+- 구현한 내용 (위 그림 참조)
+	- 
